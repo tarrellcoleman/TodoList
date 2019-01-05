@@ -1,18 +1,58 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div id="TodoList">
+    <form v-on:submit.prevent="submitted">
+      <img alt="Vue logo" src="../assets/logo.png">
+      <h1>TodoList</h1>
+      <input
+        v-model= "newTask"
+        id ="new-task"
+        placeholder="Add Task"
+      >
+      <button>Submit</button>
+    </form>
+    <ul>
+      <li v-for="task in listOfTasks" :key="task.id">
+        {{ task.tasks }}
+      </li>
+    </ul>
+    </div>
 </template>
-
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  name: 'ToDoList',
+  data () {
+    return {
+      newTask: '',
+      listOfTasks: [ { tasks: '' } ]
+    }
+  },
+  methods: {
+    submitted: function (task) {
+      this.listOfTasks.push({
+        task: this.newTask
+      })
+      this.newTask = ''
+    }
   }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
