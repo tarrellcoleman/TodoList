@@ -12,7 +12,7 @@
     </form>
     <ul>
       <li v-for="task in listOfTasks" :key="task.id">
-        {{ task.tasks }}
+        {{ task.task }}
       </li>
     </ul>
     </div>
@@ -25,7 +25,7 @@ export default {
   data () {
     return {
       newTask: '',
-      listOfTasks: [ { tasks: '' } ]
+      listOfTasks: [ { task: '' } ]
     }
   },
   methods: {
