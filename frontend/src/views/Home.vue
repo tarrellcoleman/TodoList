@@ -1,6 +1,6 @@
 <template>
   <div id="TodoList">
-    <form v-on:submit.prevent="submitted">
+    <form v-on:submit.prevent="submitted()">
       <img alt="Vue logo" src="../assets/logo.png">
       <h1>TodoList</h1>
       <input
@@ -9,9 +9,11 @@
         placeholder="Add Task"
       >
       <button>Submit</button>
+      <br>
     </form>
     <ul>
-      <li v-for="task in listOfTasks" :key="task.id">
+      <li v-for="task in listOfTasks" :key="task.id"
+          v-on: remove="deleted(task.id)">
         {{ task.task }}
       </li>
     </ul>
@@ -25,15 +27,18 @@ export default {
   data () {
     return {
       newTask: '',
-      listOfTasks: [ { task: '' } ]
+      listOfTasks: [ { } ]
     }
   },
   methods: {
-    submitted: function (task) {
+    submitted: function () {
       this.listOfTasks.push({
         task: this.newTask
       })
       this.newTask = ''
+    },
+    deleted: function (index) {
+      this.listOfTasks.$remove(index)
     }
   }
 }
