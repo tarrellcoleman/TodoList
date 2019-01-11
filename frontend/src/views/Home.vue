@@ -14,7 +14,7 @@
     <ul>
       <li v-for="(task, index) in listOfTasks" :key="task.id">
         {{ task.task }}
-      <button v-on:submit.prevent="deleted(index)">Delete</button>
+      <button v-on:click="deleted(index)">Delete</button>
       </li>
     </ul>
     </div>
