@@ -12,9 +12,9 @@
       <br>
     </form>
     <ul>
-      <li v-for="task in listOfTasks" :key="task.id"
-          v-on: remove="deleted(task.id)">
+      <li v-for="(task, index) in listOfTasks" :key="task.id">
         {{ task.task }}
+      <button v-on:submit.prevent="deleted(index)">Delete</button>
       </li>
     </ul>
     </div>
@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       newTask: '',
-      listOfTasks: [ { } ]
+      listOfTasks: [ ]
     }
   },
   methods: {
@@ -38,7 +38,7 @@ export default {
       this.newTask = ''
     },
     deleted: function (index) {
-      this.listOfTasks.$remove(index)
+      this.listOfTasks.splice(index, 1)
     }
   }
 }
