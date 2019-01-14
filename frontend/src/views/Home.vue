@@ -32,9 +32,11 @@ export default {
   },
   methods: {
     submitted: function () {
-      this.listOfTasks.push({
-        task: this.newTask
-      })
+      if (this.newTask !== '') {
+        this.listOfTasks.push({
+          task: this.newTask
+        })
+      }
       this.newTask = ''
     },
     deleted: function (index) {
