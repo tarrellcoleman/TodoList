@@ -14,14 +14,18 @@
     <ul>
       <li v-for="(task, index) in listOfTasks" :key="task.id">
         {{ task.task }}
+      <br>
       <button v-on:click="deleted(index)">Delete</button>
       <button v-on:click="task.edited=true">Edit</button>
+      <br>
       <input v-if="task.edited === true"
           v-model= "editedTask"
           id ="edit-task"
           placeholder= "Edit Task">
           <button v-if="task.edited === true"
                   v-on:click="edited(index)">Submit</button>
+          <button v-if="task.edited === true"
+                  v-on:click="task.edited=false">Cancel</button>
       </li>
     </ul>
     </div>
