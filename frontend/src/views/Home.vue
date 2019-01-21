@@ -14,7 +14,6 @@
     <ul>
       <li v-for="(task, index) in listOfTasks" :key="task.id">
         {{ task.task }}
-      <br>
       <button v-on:click="deleted(index)">Delete</button>
       <button v-on:click="task.edited=true">Edit</button>
       <br>
@@ -59,6 +58,7 @@ export default {
     edited: function (index) {
       this.$set(this.listOfTasks[index], 'task', this.editedTask)
       this.$set(this.listOfTasks[index], 'edited', false)
+      this.editedTask = ''
     }
   }
 }
