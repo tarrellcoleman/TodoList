@@ -2,7 +2,7 @@
   <div id="TodoList">
     <form v-on:submit.prevent="submitted()">
       <img alt="Vue logo" src="../assets/logo.png">
-      <h1>TodoList</h1>
+      <h1>Todo</h1>
       <input
         v-model= "newTask"
         id ="new-task"
@@ -15,6 +15,13 @@
       <li v-for="(task, index) in listOfTasks" :key="task.id">
         {{ task.task }}
       <button v-on:click="deleted(index)">Delete</button>
+      <button v-on:click="task.edited=true">Edit</button>
+      <input v-if="task.edited === true"
+          v-model= "editedTask"
+          id ="edit-task"
+          placeholder= "Edit Task">
+          <button v-if="task.edited === true"
+                  v-on:click="edited(index)">Submit</button>
       </li>
     </ul>
     </div>
@@ -27,20 +34,27 @@ export default {
   data () {
     return {
       newTask: '',
-      listOfTasks: [ ]
+      listOfTasks: [ ],
+      isEdit: false,
+      editedTask: ''
     }
   },
   methods: {
     submitted: function () {
       if (this.newTask !== '') {
         this.listOfTasks.push({
-          task: this.newTask
+          task: this.newTask,
+          edited: false
         })
       }
       this.newTask = ''
     },
     deleted: function (index) {
       this.listOfTasks.splice(index, 1)
+    },
+    edited: function (index) {
+      this.$set(this.listOfTasks[index], 'task', this.editedTask)
+      this.$set(this.listOfTasks[index], 'edited', false)
     }
   }
 }
