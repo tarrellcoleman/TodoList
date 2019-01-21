@@ -34,7 +34,8 @@
             type="image" name="sumbitEdited"
             src="../content/submitButton.png"
             border="0" alt="Edited" style="width: 20px;" />
-      <input v-if="task.edited=false"
+      <input v-if="task.edited===true"
+            v-on:click="task.edited=false"
             type="image" name="cancel"
             src="../content/cancelButton.png"
             border="0" alt="Cancel" style="width: 20px;" />
